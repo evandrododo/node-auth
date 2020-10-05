@@ -93,7 +93,7 @@ router.post(
 router.post(
   "/login",
   [
-    check("email", "Insira um email válido").isEmail(),
+    check("username", "Insira um usuário válido").not().isEmpty(),
     check("password", "Insira uma senha válida").isLength({
       min: 6,
     }),
@@ -107,11 +107,16 @@ router.post(
       });
     }
 
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     try {
       let usuario = await Usuario.findOne({
-        email,
+        username,
       });
+      if (!usuario) {
+        usuario = await Usuario.findOne({
+          email: username,
+        });
+      }
       if (!usuario)
         return res.status(400).json({
           message: "Usuário não existe",
