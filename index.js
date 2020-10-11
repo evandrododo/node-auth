@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const usuario = require("./routes/usuario");
 const item = require("./routes/item");
+const cliente = require("./routes/cliente");
 const cors = require("cors");
 const InitiateMongoServer = require("./config/db");
 
@@ -32,6 +33,13 @@ app.use("/usuario", usuario);
  * Method - *
  */
 app.use("/item", item);
+
+/**
+ * Router Middleware
+ * Router - /cliente/*
+ * Method - *
+ */
+app.use("/cliente", cliente);
 
 app.listen(PORT, (req, res) => {
   console.log(`Servidor disponível na porta ${PORT}`);
