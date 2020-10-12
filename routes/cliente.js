@@ -35,7 +35,7 @@ router.post(
       });
     }
 
-    const { username, email, password, nome, celular } = req.body;
+    const { username, email, password, nome, celular, urlFoto } = req.body;
     try {
       let usuario = await Usuario.findOne({
         email,
@@ -59,11 +59,11 @@ router.post(
       await usuario.save();
 
       // Cria um novo cliente referenciando o usuário
-      console.log('usuarui', usuario)
       cliente = new Cliente({
         usuario: usuario._id,
         nome,
         celular,
+        urlFoto,
       });
 
       await cliente.save();

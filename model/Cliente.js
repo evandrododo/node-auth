@@ -9,6 +9,9 @@ const ClienteSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  urlFoto: {
+    type: String,
+  },
   celular: {
     type: String,
   },
